@@ -1,0 +1,48 @@
+[package]
+name = "accent-color"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+palette = "0.7"
+thiserror = "1"
+tokio-stream = "0.1"
+
+[dev-dependencies]
+tokio = {version = "1", features = ["full"]}
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = {version = "0.57", features = ["Win32_System_Registry", "Win32_System_Threading", "Win32_Security"]}
+windows-registry = "0.1"
+windows-result = "0.1"
+ulid = "1"
+async-stream = "0.3"
+tokio = {version = "1", features = ["rt", "time"]}
+
+[target.'cfg(target_os = "linux")'.dependencies]
+ashpd = "0.8"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+#cocoa = "0.25"
+#objc = "0.2"
+#block = "0.1"
+async-stream = "0.3"
+tokio = {version = "1", features = ["rt", "time", "sync"]}
+block2 = "0.5"
+objc2 = "0.5"
+objc2-app-kit = { version = "0.2", features = ["NSColor", "NSColorSpace"] }
+
+[target.'cfg(target_os = "macos")'.dependencies.objc2-foundation]
+version = "0.2"
+features = [
+  "NSString",
+  "NSOperation",
+  "NSUserDefaults",
+  "block2",
+  "NSDistributedNotificationCenter",
+  "NSNotification",
+  "NSRunLoop",
+  "NSDate"
+]
